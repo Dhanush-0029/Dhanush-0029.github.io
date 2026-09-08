@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhanush S — Data Analyst &amp; Patent Analyst</title>
+<meta name="description" content="Portfolio of Dhanush S — Data Analyst, Business Intelligence, and Patent Analyst based in Bengaluru.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1F0EA;
+    --paper-raised:#EAE8E0;
+    --ink:#15191C;
+    --muted:#5B6169;
+    --line:#D8D5CA;
+    --accent:#1F6F62;
+    --accent-soft:#E4ECE9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--accent-soft); color:var(--ink); }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:720px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(241,240,234,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:720px; margin:0 auto; padding:16px 28px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'Space Grotesk', sans-serif;
+  }
+  .nav-inner .mark{ font-weight:600; font-size:0.95rem; letter-spacing:0.01em; }
+  .nav-links{ display:flex; gap:22px; font-size:0.88rem; color:var(--muted); }
+  .nav-links a{ position:relative; }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-4px; height:1px;
+    background:var(--accent); transform:scaleX(0); transform-origin:left;
+    transition:transform .2s ease;
+  }
+  .nav-links a:hover::after{ transform:scaleX(1); }
+
+  /* HERO */
+  .hero{ padding:76px 0 40px; }
+  .hero .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem; color:var(--accent); margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero .kicker .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--accent);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:clamp(2rem, 5vw, 2.9rem);
+    line-height:1.12;
+    margin:0 0 20px;
+    letter-spacing:-0.01em;
+  }
+  .hero p.lede{
+    font-size:1.08rem;
+    color:var(--muted);
+    max-width:52ch;
+    margin:0 0 30px;
+  }
+  .hero-links{ display:flex; flex-wrap:wrap; gap:10px; }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    padding:10px 16px;
+    border:1px solid var(--ink);
+    display:inline-block;
+  }
+  .btn.primary{ background:var(--ink); color:var(--paper); }
+  .btn.primary:hover{ background:var(--accent); border-color:var(--accent); }
+  .btn.ghost{ border-color:var(--line); color:var(--ink); }
+  .btn.ghost:hover{ border-color:var(--ink); }
+
+  /* METRICS */
+  .metrics{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin:48px 0 8px;
+  }
+  .metric{ background:var(--paper); padding:20px 16px; }
+  .metric .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.5rem; font-weight:500; color:var(--ink);
+    display:block; margin-bottom:6px;
+  }
+  .metric .label{ font-size:0.78rem; color:var(--muted); line-height:1.35; }
+
+  /* SECTIONS */
+  section{ padding:56px 0; border-top:1px solid var(--line); }
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:28px;
+  }
+  .section-head h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.3rem; font-weight:600; margin:0;
+  }
+  .section-head .idx{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem; color:var(--muted);
+  }
+
+  .about p{ margin:0 0 16px; color:var(--ink); max-width:64ch; }
+  .about p.muted{ color:var(--muted); }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline{ position:relative; padding-left:24px; }
+  .timeline::before{
+    content:''; position:absolute; left:0; top:6px; bottom:6px; width:1px;
+    background:var(--line);
+  }
+  .job{ position:relative; margin-bottom:36px; }
+  .job:last-child{ margin-bottom:0; }
+  .job::before{
+    content:''; position:absolute; left:-28px; top:5px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--accent);
+  }
+  .job .when{
+    font-family:'IBM Plex Mono', monospace; font-size:0.76rem;
+    color:var(--accent); margin-bottom:6px; display:block;
+  }
+  .job h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.05rem; font-weight:600; margin:0 0 2px;
+  }
+  .job .org{ color:var(--muted); font-size:0.92rem; margin-bottom:10px; display:block; }
+  .job ul{ margin:0; padding-left:18px; color:var(--ink); }
+  .job li{ margin-bottom:6px; font-size:0.94rem; }
+  .job li::marker{ color:var(--muted); }
+
+  /* PROJECTS */
+  .project{
+    border-top:1px solid var(--line);
+    padding:26px 0;
+    display:grid;
+    grid-template-columns:180px 1fr;
+    gap:24px;
+  }
+  .project:first-child{ border-top:none; padding-top:0; }
+  .project .ptag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.76rem; color:var(--muted);
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .project h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.08rem; font-weight:600; margin:0 0 8px;
+  }
+  .project p{ margin:0 0 10px; color:var(--ink); font-size:0.94rem; max-width:58ch; }
+  .project .stack{ color:var(--muted); font-size:0.82rem; font-family:'IBM Plex Mono', monospace; }
+
+  /* SKILLS */
+  .skills-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px 32px;
+  }
+  .skill-group h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem; color:var(--accent);
+    text-transform:uppercase; letter-spacing:0.04em;
+    margin:0 0 10px;
+  }
+  .skill-group p{ margin:0; color:var(--ink); font-size:0.92rem; line-height:1.7; }
+
+  /* EDU + CERTS */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+  .split h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:0.95rem; font-weight:600; margin:0 0 14px;
+  }
+  .edu-item{ margin-bottom:16px; }
+  .edu-item .deg{ font-size:0.94rem; margin-bottom:2px; }
+  .edu-item .meta{ font-size:0.82rem; color:var(--muted); }
+
+  /* CONTACT / FOOTER */
+  footer{
+    border-top:1px solid var(--line);
+    padding:56px 0 40px;
+  }
+  footer h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.6rem; font-weight:600; margin:0 0 16px;
+    max-width:20ch;
+  }
+  footer p{ color:var(--muted); margin:0 0 24px; max-width:48ch; }
+  .contact-links{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:40px; }
+  .foot-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:0.78rem; color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width:640px){
+    .metrics{ grid-template-columns:repeat(2,1fr); }
+    .skills-grid{ grid-template-columns:1fr; }
+    .split{ grid-template-columns:1fr; }
+    .project{ grid-template-columns:1fr; gap:8px; }
+    .nav-links{ gap:14px; font-size:0.8rem; }
+    .hero{ padding:56px 0 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="mark">Dhanush S</span>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border:none; padding-bottom:0;">
+    <div class="kicker"><span class="dot"></span>Bengaluru, India — open to Analyst &amp; MIS roles</div>
+    <h1>Data Analyst &amp; Patent Analyst who turns messy datasets and dense filings into clear decisions.</h1>
+    <p class="lede">I build MIS dashboards, automate reporting pipelines, and dig through prior art — currently at Prasa IP, previously at Bharat Electronics Limited's Central Research Laboratory.</p>
+    <div class="hero-links">
+      <a class="btn primary" href="mailto:ds1950217@gmail.com">Email me</a>
+      <a class="btn ghost" href="https://github.com/Dhanush-0029" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="https://linkedin.com/in/Dhanush-s" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <div class="metrics">
+    <div class="metric"><span class="num">60%</span><span class="label">manual tracking effort cut via a Python license-monitoring system</span></div>
+    <div class="metric"><span class="num">50K+</span><span class="label">records cleaned &amp; analyzed for a two-wheeler market study</span></div>
+    <div class="metric"><span class="num">3hr → 15min</span><span class="label">weekly MIS reporting time after automation</span></div>
+    <div class="metric"><span class="num">10+</span><span class="label">software licenses tracked across a defence R&amp;D lab</span></div>
+  </div>
+
+  <section class="about" id="about">
+    <div class="section-head"><h2>About</h2><span class="idx">01</span></div>
+    <p>I'm a Data Analyst and Business Intelligence practitioner with a B.Tech in Computer Science &amp; Engineering (Data Science) from Presidency University, Bengaluru. My work sits at the intersection of clean data pipelines, readable dashboards, and — more recently — technical patent analysis.</p>
+    <p class="muted">I currently work as an Associate Patent Analyst at Prasa IP, evaluating AI/ML and cloud computing disclosures for novelty and prior art. Before that, I interned as a Cloud &amp; Data Analyst at Bharat Electronics Limited's Central Research Laboratory, building tooling used by senior defence researchers. Alongside this, I co-founded GigID, an early-stage venture building credit-scoring infrastructure for India's gig workers.</p>
+  </section>
+
+  <section id="experience">
+    <div class="section-head"><h2>Experience</h2><span class="idx">02</span></div>
+    <div class="timeline">
+      <div class="job">
+        <span class="when">Aug 2026 — Present</span>
+        <h3>Associate Patent Analyst</h3>
+        <span class="org">Prasa IP</span>
+        <ul>
+          <li>Evaluate patent disclosures across AI/ML, cloud computing, and data structures for novelty and patentability.</li>
+          <li>Run prior art retrieval and Boolean search across Google Patents, Espacenet, and Orbit Intelligence workflows.</li>
+          <li>Map claim trees and assess technical disclosures for infringement and freedom-to-operate questions.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <span class="when">Jan 2026 — Apr 2026</span>
+        <h3>Cloud &amp; Data Analyst Intern</h3>
+        <span class="org">Bharat Electronics Limited — Central Research Laboratory</span>
+        <ul>
+          <li>Built a Python license-monitoring system across 10+ defence R&amp;D tools, cutting manual tracking by ~60%.</li>
+          <li>Developed automated MIS dashboards that informed resource-allocation decisions for senior researchers.</li>
+          <li>Designed REST API and SQL integrations on Ubuntu/Linux to structure tool-usage data from multiple sources.</li>
+          <li>Deployed components with Docker for consistent dev-to-production environments.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head"><h2>Projects</h2><span class="idx">03</span></div>
+
+    <div class="project">
+      <span class="ptag">Founder</span>
+      <div>
+        <h3>GigID</h3>
+        <p>Early-stage fintech venture building credit-scoring infrastructure for India's gig workers, who are largely invisible to traditional lenders. Leading product and partnerships as Co-Founder &amp; CEO.</p>
+        <span class="stack">Credit scoring · Fintech infra · Gig economy</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <span class="ptag">Client work</span>
+      <div>
+        <h3>Indian Two-Wheeler Market Analysis</h3>
+        <p>Extracted and structured 50,000+ records across demographics, manufacturer competition, and regional sales. Correlation analysis and statistical modeling surfaced five key factors driving market-share shifts, feeding River Mobility's EV go-to-market strategy.</p>
+        <span class="stack">Python (pandas, NumPy, scikit-learn) · Power BI</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <span class="ptag">Academic</span>
+      <div>
+        <h3>MIS Reporting Automation</h3>
+        <p>Automated weekly MIS report generation from CSV/Excel sources with validation checks for anomalies and missing entries, cutting manual reporting time from ~3 hours to under 15 minutes.</p>
+        <span class="stack">Python · Excel automation · Scheduled scripts</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head"><h2>Skills</h2><span class="idx">04</span></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <p>Python, SQL, HTML, CSS, JavaScript (Node.js)</p>
+      </div>
+      <div class="skill-group">
+        <h4>BI &amp; Reporting</h4>
+        <p>Power BI, Tableau, Advanced Excel (Pivot Tables, VLOOKUP, Macros), MIS Reporting</p>
+      </div>
+      <div class="skill-group">
+        <h4>Data &amp; ML</h4>
+        <p>ETL Pipelines, Data Cleaning, Statistical Analysis, Machine Learning, NLP, MongoDB</p>
+      </div>
+      <div class="skill-group">
+        <h4>Cloud &amp; DevOps</h4>
+        <p>AWS, Docker, REST APIs, Linux/Ubuntu</p>
+      </div>
+      <div class="skill-group">
+        <h4>Patent &amp; IP</h4>
+        <p>Prior art retrieval, patentability assessment, claim tree mapping, Google Patents, Espacenet, Orbit Intelligence</p>
+      </div>
+      <div class="skill-group">
+        <h4>Concepts</h4>
+        <p>KPI tracking, dashboard development, data-driven decision making, DBMS, big data analytics</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head"><h2>Education &amp; Certifications</h2><span class="idx">05</span></div>
+    <div class="split">
+      <div>
+        <h4>Education</h4>
+        <div class="edu-item">
+          <div class="deg">B.Tech, Computer Science &amp; Engineering (Data Science)</div>
+          <div class="meta">Presidency University, Bengaluru · 2022 – 2026</div>
+        </div>
+        <div class="edu-item">
+          <div class="deg">Higher Secondary (12th), PCM</div>
+          <div class="meta">Jindal Vidya Mandir, Vidyanagar, Bellary · 2022</div>
+        </div>
+      </div>
+      <div>
+        <h4>Certifications</h4>
+        <div class="edu-item">
+          <div class="deg">Data Analysis Certificate</div>
+          <div class="meta">Novitech R&amp;D · Nov 2025</div>
+        </div>
+        <div class="edu-item">
+          <div class="deg">Infosys Springboard Certification</div>
+          <div class="meta">Infosys · Sep 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk data, patents, or gig-economy infrastructure.</h2>
+    <p>Open to Analyst and MIS roles, and always glad to compare notes on BI tooling, prior art search, or early-stage fintech.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:ds1950217@gmail.com">ds1950217@gmail.com</a>
+      <a class="btn ghost" href="https://linkedin.com/in/Dhanush-s" target="_blank" rel="noopener">linkedin.com/in/Dhanush-s</a>
+      <a class="btn ghost" href="https://github.com/Dhanush-0029" target="_blank" rel="noopener">github.com/Dhanush-0029</a>
+    </div>
+    <div class="foot-bottom">
+      <span>Dhanush S — Bengaluru, Karnataka</span>
+      <span>Built &amp; hosted on GitHub Pages</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
