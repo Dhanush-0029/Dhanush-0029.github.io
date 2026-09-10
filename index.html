@@ -3,366 +3,384 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dhanush S — Data Analyst &amp; Patent Analyst</title>
-<meta name="description" content="Portfolio of Dhanush S — Data Analyst, Business Intelligence, and Patent Analyst based in Bengaluru.">
+<title>Dhanush S — Portfolio</title>
+<meta name="description" content="Dhanush S — Data Analyst, Patent Analyst, and Founder based in Bengaluru.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
   :root{
-    --paper:#F1F0EA;
-    --paper-raised:#EAE8E0;
-    --ink:#15191C;
-    --muted:#5B6169;
-    --line:#D8D5CA;
-    --accent:#1F6F62;
-    --accent-soft:#E4ECE9;
+    --bg:#15120F;
+    --bg-raised:#1C1815;
+    --paper:#F5F1EA;
+    --muted:#A79E93;
+    --muted-2:#77706654;
+    --gold:#C7A25C;
+    --gold-dim:#8A7647;
+    --line:rgba(245,241,234,0.09);
   }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
   body{
     margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
+    background:var(--bg);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
   }
-  ::selection{ background:var(--accent-soft); color:var(--ink); }
-
+  ::selection{ background:var(--gold); color:var(--bg); }
   a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
 
-  .wrap{
-    max-width:720px;
-    margin:0 auto;
-    padding:0 28px;
+  h1,h2,h3,.serif{ font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em; }
+  .eyebrow{
+    font-family:'Inter', sans-serif;
+    font-size:0.78rem; letter-spacing:0.08em;
+    color:var(--gold); font-weight:500;
   }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 32px; }
 
   /* NAV */
-  header.nav{
-    position:sticky; top:0; z-index:10;
-    background:rgba(241,240,234,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line);
+  nav.top{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    padding:26px 0;
+    mix-blend-mode:difference;
   }
-  .nav-inner{
-    max-width:720px; margin:0 auto; padding:16px 28px;
-    display:flex; justify-content:space-between; align-items:center;
-    font-family:'Space Grotesk', sans-serif;
-  }
-  .nav-inner .mark{ font-weight:600; font-size:0.95rem; letter-spacing:0.01em; }
-  .nav-links{ display:flex; gap:22px; font-size:0.88rem; color:var(--muted); }
-  .nav-links a{ position:relative; }
-  .nav-links a:hover{ color:var(--ink); }
-  .nav-links a::after{
-    content:''; position:absolute; left:0; right:0; bottom:-4px; height:1px;
-    background:var(--accent); transform:scaleX(0); transform-origin:left;
-    transition:transform .2s ease;
-  }
-  .nav-links a:hover::after{ transform:scaleX(1); }
+  .nav-inner{ max-width:1120px; margin:0 auto; padding:0 32px; display:flex; justify-content:space-between; align-items:center; }
+  .nav-inner .mark{ font-family:'Fraunces', serif; font-size:1.1rem; }
+  .nav-links{ display:flex; gap:32px; font-size:0.82rem; }
+  .nav-links a{ opacity:0.75; transition:opacity .25s; }
+  .nav-links a:hover{ opacity:1; }
 
   /* HERO */
-  .hero{ padding:76px 0 40px; }
-  .hero .kicker{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.82rem; color:var(--accent); margin-bottom:18px;
-    display:flex; align-items:center; gap:10px;
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:120px 0 60px;
+    overflow:hidden;
   }
-  .hero .kicker .dot{
-    width:7px; height:7px; border-radius:50%; background:var(--accent);
-    display:inline-block;
+  #hero-canvas{
+    position:absolute; inset:0; z-index:0;
+    opacity:0.9;
   }
-  h1{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight:600;
-    font-size:clamp(2rem, 5vw, 2.9rem);
-    line-height:1.12;
-    margin:0 0 20px;
-    letter-spacing:-0.01em;
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:60px;
+    align-items:center;
+    width:100%;
   }
-  .hero p.lede{
-    font-size:1.08rem;
-    color:var(--muted);
-    max-width:52ch;
-    margin:0 0 30px;
+  .hero-copy .eyebrow{ display:flex; align-items:center; gap:10px; margin-bottom:24px; }
+  .hero-copy .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--gold); }
+  .hero-copy h1{
+    font-size:clamp(2.6rem, 5.2vw, 4.4rem);
+    line-height:1.04;
+    margin:0 0 26px;
   }
-  .hero-links{ display:flex; flex-wrap:wrap; gap:10px; }
+  .hero-copy h1 em{ font-style:italic; color:var(--gold); }
+  .hero-copy p{
+    color:var(--muted); font-size:1.05rem; max-width:46ch; margin:0 0 36px;
+    font-weight:300; line-height:1.7;
+  }
+  .hero-cta{ display:flex; gap:16px; flex-wrap:wrap; }
   .btn{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.82rem;
-    padding:10px 16px;
-    border:1px solid var(--ink);
-    display:inline-block;
+    font-size:0.85rem; padding:14px 26px; border:1px solid var(--line);
+    display:inline-flex; align-items:center; gap:10px;
+    transition:border-color .25s, background .25s, color .25s;
   }
-  .btn.primary{ background:var(--ink); color:var(--paper); }
-  .btn.primary:hover{ background:var(--accent); border-color:var(--accent); }
-  .btn.ghost{ border-color:var(--line); color:var(--ink); }
-  .btn.ghost:hover{ border-color:var(--ink); }
+  .btn.solid{ background:var(--gold); border-color:var(--gold); color:var(--bg); font-weight:500; }
+  .btn.solid:hover{ background:transparent; color:var(--gold); }
+  .btn.line:hover{ border-color:var(--gold); color:var(--gold); }
 
-  /* METRICS */
-  .metrics{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
-    margin:48px 0 8px;
+  .hero-portrait{
+    position:relative; z-index:2;
+    aspect-ratio:4/5;
+    overflow:hidden;
   }
-  .metric{ background:var(--paper); padding:20px 16px; }
-  .metric .num{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:1.5rem; font-weight:500; color:var(--ink);
-    display:block; margin-bottom:6px;
+  .hero-portrait img{
+    width:100%; height:100%; object-fit:cover;
+    filter:grayscale(1) contrast(1.08);
   }
-  .metric .label{ font-size:0.78rem; color:var(--muted); line-height:1.35; }
-
-  /* SECTIONS */
-  section{ padding:56px 0; border-top:1px solid var(--line); }
-  .section-head{
-    display:flex; align-items:baseline; justify-content:space-between;
-    margin-bottom:28px;
+  .hero-portrait::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(21,18,15,0) 55%, rgba(21,18,15,0.65) 100%);
   }
-  .section-head h2{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.3rem; font-weight:600; margin:0;
-  }
-  .section-head .idx{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.78rem; color:var(--muted);
+  .hero-portrait .frame-label{
+    position:absolute; bottom:16px; left:16px; z-index:3;
+    font-size:0.72rem; color:var(--paper); opacity:0.8;
+    letter-spacing:0.06em;
   }
 
-  .about p{ margin:0 0 16px; color:var(--ink); max-width:64ch; }
-  .about p.muted{ color:var(--muted); }
+  .scroll-cue{
+    position:absolute; bottom:32px; left:32px; z-index:2;
+    display:flex; align-items:center; gap:10px;
+    font-size:0.72rem; color:var(--muted); letter-spacing:0.05em;
+  }
+  .scroll-cue .line{ width:1px; height:38px; background:var(--line); position:relative; overflow:hidden; }
+  .scroll-cue .line::after{
+    content:''; position:absolute; top:0; left:0; right:0; height:12px;
+    background:var(--gold); animation:scrollmove 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollmove{ 0%{ transform:translateY(-100%);} 100%{ transform:translateY(140px);} }
 
-  /* EXPERIENCE TIMELINE */
-  .timeline{ position:relative; padding-left:24px; }
-  .timeline::before{
-    content:''; position:absolute; left:0; top:6px; bottom:6px; width:1px;
-    background:var(--line);
+  /* SECTION SHELL */
+  section{ position:relative; padding:130px 0; border-top:1px solid var(--line); }
+  .section-tag{ display:flex; align-items:center; gap:14px; margin-bottom:60px; }
+  .section-tag .n{ font-family:'Fraunces', serif; font-size:0.9rem; color:var(--gold); }
+  .section-tag .l{ flex:1; height:1px; background:var(--line); }
+  .section-tag h2{ font-size:2rem; margin:0; white-space:nowrap; }
+
+  .reveal{ opacity:0; transform:translateY(28px); }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; }
+  .about-grid .big{ font-family:'Fraunces', serif; font-size:1.7rem; font-weight:400; line-height:1.42; color:var(--paper); }
+  .about-grid .big em{ font-style:italic; color:var(--gold); }
+  .about-side p{ color:var(--muted); font-size:0.95rem; line-height:1.8; margin:0 0 20px; }
+  .about-side .fact{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:0.85rem; }
+  .about-side .fact span:first-child{ color:var(--muted); }
+
+  /* EXPERIENCE */
+  .job{
+    display:grid; grid-template-columns:200px 1fr;
+    gap:40px; padding:36px 0; border-top:1px solid var(--line);
   }
-  .job{ position:relative; margin-bottom:36px; }
-  .job:last-child{ margin-bottom:0; }
-  .job::before{
-    content:''; position:absolute; left:-28px; top:5px;
-    width:9px; height:9px; border-radius:50%;
-    background:var(--paper); border:2px solid var(--accent);
-  }
-  .job .when{
-    font-family:'IBM Plex Mono', monospace; font-size:0.76rem;
-    color:var(--accent); margin-bottom:6px; display:block;
-  }
-  .job h3{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.05rem; font-weight:600; margin:0 0 2px;
-  }
-  .job .org{ color:var(--muted); font-size:0.92rem; margin-bottom:10px; display:block; }
-  .job ul{ margin:0; padding-left:18px; color:var(--ink); }
-  .job li{ margin-bottom:6px; font-size:0.94rem; }
-  .job li::marker{ color:var(--muted); }
+  .job:first-child{ border-top:none; padding-top:0; }
+  .job .when{ font-size:0.85rem; color:var(--gold); }
+  .job h3{ font-size:1.35rem; margin:0 0 4px; }
+  .job .org{ color:var(--muted); font-size:0.9rem; margin-bottom:16px; display:block; }
+  .job ul{ margin:0; padding-left:18px; color:var(--paper); opacity:0.85; }
+  .job li{ margin-bottom:8px; font-size:0.92rem; line-height:1.6; }
 
   /* PROJECTS */
   .project{
-    border-top:1px solid var(--line);
-    padding:26px 0;
-    display:grid;
-    grid-template-columns:180px 1fr;
-    gap:24px;
+    display:grid; grid-template-columns:80px 1fr 200px;
+    gap:30px; align-items:start;
+    padding:38px 0; border-top:1px solid var(--line);
+    transition:padding-left .3s ease;
   }
-  .project:first-child{ border-top:none; padding-top:0; }
-  .project .ptag{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.76rem; color:var(--muted);
-    text-transform:uppercase; letter-spacing:0.04em;
-  }
-  .project h3{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.08rem; font-weight:600; margin:0 0 8px;
-  }
-  .project p{ margin:0 0 10px; color:var(--ink); font-size:0.94rem; max-width:58ch; }
-  .project .stack{ color:var(--muted); font-size:0.82rem; font-family:'IBM Plex Mono', monospace; }
+  .project:first-child{ border-top:none; }
+  .project:hover{ padding-left:14px; }
+  .project .idx{ font-family:'Fraunces', serif; font-size:1rem; color:var(--gold); }
+  .project h3{ font-size:1.5rem; margin:0 0 12px; }
+  .project p{ color:var(--muted); font-size:0.92rem; line-height:1.7; max-width:56ch; margin:0; }
+  .project .stack{ font-size:0.78rem; color:var(--muted); text-align:right; line-height:1.8; }
 
   /* SKILLS */
-  .skills-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:28px 32px;
+  .skills-wrap{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px 30px; }
+  .skill-group .eyebrow{ display:block; margin-bottom:14px; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-size:0.78rem; padding:7px 13px; border:1px solid var(--line);
+    color:var(--paper); opacity:0.85;
   }
-  .skill-group h4{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:0.78rem; color:var(--accent);
-    text-transform:uppercase; letter-spacing:0.04em;
-    margin:0 0 10px;
-  }
-  .skill-group p{ margin:0; color:var(--ink); font-size:0.92rem; line-height:1.7; }
 
-  /* EDU + CERTS */
-  .split{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
-  .split h4{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:0.95rem; font-weight:600; margin:0 0 14px;
-  }
-  .edu-item{ margin-bottom:16px; }
-  .edu-item .deg{ font-size:0.94rem; margin-bottom:2px; }
+  /* EDU/CERTS */
+  .split{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  .split h4{ font-size:1.1rem; margin:0 0 20px; }
+  .edu-item{ margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--line); }
+  .edu-item:last-child{ border-bottom:none; }
+  .edu-item .deg{ font-size:0.98rem; margin-bottom:4px; }
   .edu-item .meta{ font-size:0.82rem; color:var(--muted); }
 
-  /* CONTACT / FOOTER */
-  footer{
-    border-top:1px solid var(--line);
-    padding:56px 0 40px;
-  }
+  /* CONTACT */
+  footer{ padding:140px 0 60px; }
   footer h2{
-    font-family:'Space Grotesk', sans-serif;
-    font-size:1.6rem; font-weight:600; margin:0 0 16px;
-    max-width:20ch;
+    font-size:clamp(2.2rem, 6vw, 4rem); margin:0 0 40px; max-width:14ch; line-height:1.08;
   }
-  footer p{ color:var(--muted); margin:0 0 24px; max-width:48ch; }
-  .contact-links{ display:flex; flex-wrap:wrap; gap:12px; margin-bottom:40px; }
-  .foot-bottom{
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-size:0.78rem; color:var(--muted);
-    font-family:'IBM Plex Mono', monospace;
-  }
+  .contact-row{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:30px; margin-bottom:80px; }
+  .contact-links{ display:flex; flex-direction:column; gap:14px; }
+  .contact-links a{ font-size:1.1rem; border-bottom:1px solid transparent; width:fit-content; transition:border-color .25s, color .25s; }
+  .contact-links a:hover{ border-color:var(--gold); color:var(--gold); }
+  .foot-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.75rem; color:var(--muted); border-top:1px solid var(--line); padding-top:24px; }
 
-  @media (max-width:640px){
-    .metrics{ grid-template-columns:repeat(2,1fr); }
-    .skills-grid{ grid-template-columns:1fr; }
-    .split{ grid-template-columns:1fr; }
-    .project{ grid-template-columns:1fr; gap:8px; }
-    .nav-links{ gap:14px; font-size:0.8rem; }
-    .hero{ padding:56px 0 32px; }
+  @media (max-width:860px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-portrait{ order:-1; max-width:260px; margin:0 auto 20px; }
+    .about-grid, .split{ grid-template-columns:1fr; }
+    .job{ grid-template-columns:1fr; gap:10px; }
+    .project{ grid-template-columns:1fr; gap:10px; }
+    .project .stack{ text-align:left; }
+    .skills-wrap{ grid-template-columns:1fr 1fr; }
+    .nav-links{ display:none; }
+    section{ padding:90px 0; }
   }
 </style>
 </head>
 <body>
 
-<header class="nav">
+<nav class="top">
   <div class="nav-inner">
-    <span class="mark">Dhanush S</span>
-    <nav class="nav-links">
+    <span class="mark">DS.</span>
+    <div class="nav-links">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main class="wrap">
-
-  <section class="hero" style="border:none; padding-bottom:0;">
-    <div class="kicker"><span class="dot"></span>Bengaluru, India — open to Analyst &amp; MIS roles</div>
-    <h1>Data Analyst &amp; Patent Analyst who turns messy datasets and dense filings into clear decisions.</h1>
-    <p class="lede">I build MIS dashboards, automate reporting pipelines, and dig through prior art — currently at Prasa IP, previously at Bharat Electronics Limited's Central Research Laboratory.</p>
-    <div class="hero-links">
-      <a class="btn primary" href="mailto:ds1950217@gmail.com">Email me</a>
-      <a class="btn ghost" href="https://github.com/Dhanush-0029" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn ghost" href="https://linkedin.com/in/Dhanush-s" target="_blank" rel="noopener">LinkedIn</a>
     </div>
-  </section>
-
-  <div class="metrics">
-    <div class="metric"><span class="num">60%</span><span class="label">manual tracking effort cut via a Python license-monitoring system</span></div>
-    <div class="metric"><span class="num">50K+</span><span class="label">records cleaned &amp; analyzed for a two-wheeler market study</span></div>
-    <div class="metric"><span class="num">3hr → 15min</span><span class="label">weekly MIS reporting time after automation</span></div>
-    <div class="metric"><span class="num">10+</span><span class="label">software licenses tracked across a defence R&amp;D lab</span></div>
   </div>
+</nav>
 
-  <section class="about" id="about">
-    <div class="section-head"><h2>About</h2><span class="idx">01</span></div>
-    <p>I'm a Data Analyst and Business Intelligence practitioner with a B.Tech in Computer Science &amp; Engineering (Data Science) from Presidency University, Bengaluru. My work sits at the intersection of clean data pipelines, readable dashboards, and — more recently — technical patent analysis.</p>
-    <p class="muted">I currently work as an Associate Patent Analyst at Prasa IP, evaluating AI/ML and cloud computing disclosures for novelty and prior art. Before that, I interned as a Cloud &amp; Data Analyst at Bharat Electronics Limited's Central Research Laboratory, building tooling used by senior defence researchers. Alongside this, I co-founded GigID, an early-stage venture building credit-scoring infrastructure for India's gig workers.</p>
-  </section>
+<section class="hero" style="border:none;">
+  <canvas id="hero-canvas"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="dot"></span>BENGALURU, INDIA</div>
+      <h1>Data, decoded.<br>Patents, <em>defended.</em></h1>
+      <p>I'm Dhanush — a Data Analyst and Patent Analyst who builds dashboards that make sense and reads filings that don't. Currently at Prasa IP, building GigID on the side.</p>
+      <div class="hero-cta">
+        <a class="btn solid" href="mailto:ds1950217@gmail.com">Get in touch</a>
+        <a class="btn line" href="#projects">View work</a>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <img src="assets/photo.png" alt="Portrait of Dhanush S">
+      <span class="frame-label">DS — 2026</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="line"></div>SCROLL</div>
+</section>
 
-  <section id="experience">
-    <div class="section-head"><h2>Experience</h2><span class="idx">02</span></div>
-    <div class="timeline">
-      <div class="job">
-        <span class="when">Aug 2026 — Present</span>
-        <h3>Associate Patent Analyst</h3>
+<section id="about">
+  <div class="wrap">
+    <div class="section-tag"><span class="n">01</span><div class="l"></div><h2>About</h2></div>
+    <div class="about-grid">
+      <p class="big reveal">I turn <em>messy datasets</em> into dashboards people actually use, and dense technical filings into <em>clear</em>, defensible claims.</p>
+      <div class="about-side reveal">
+        <p>B.Tech in Computer Science &amp; Engineering (Data Science) from Presidency University, Bengaluru. Currently an Associate Patent Engineer at Prasa IP, working across AI/ML disclosures, prior art retrieval, drafting, and prosecution. Previously a Cloud &amp; Data Analyst Intern at Bharat Electronics Limited's Central Research Laboratory. Alongside this, I co-founded GigID, building credit-scoring infrastructure for India's gig workers.</p>
+        <div class="fact"><span>Based in</span><span>Bengaluru, India</span></div>
+        <div class="fact"><span>Currently</span><span>Prasa IP</span></div>
+        <div class="fact"><span>Founding</span><span>GigID</span></div>
+        <div class="fact"><span>Open to</span><span>Analyst &amp; MIS roles</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-tag"><span class="n">02</span><div class="l"></div><h2>Experience</h2></div>
+
+    <div class="job reveal">
+      <div><span class="when">Aug 2026 — Present</span></div>
+      <div>
+        <h3>Associate Patent Engineer</h3>
         <span class="org">Prasa IP</span>
         <ul>
-          <li>Evaluate patent disclosures across AI/ML, cloud computing, and data structures for novelty and patentability.</li>
-          <li>Run prior art retrieval and Boolean search across Google Patents, Espacenet, and Orbit Intelligence workflows.</li>
-          <li>Map claim trees and assess technical disclosures for infringement and freedom-to-operate questions.</li>
+          <li>Evaluate AI/ML, cloud computing, and data-structure disclosures for novelty and patentability.</li>
+          <li>Run prior art retrieval and Boolean search across Google Patents, Espacenet, and Orbit Intelligence.</li>
+          <li>Draft and prosecute applications, responding to First Examination Reports (FER) and USPTO actions.</li>
         </ul>
       </div>
-      <div class="job">
-        <span class="when">Jan 2026 — Apr 2026</span>
+    </div>
+
+    <div class="job reveal">
+      <div><span class="when">Jan 2026 — Apr 2026</span></div>
+      <div>
         <h3>Cloud &amp; Data Analyst Intern</h3>
         <span class="org">Bharat Electronics Limited — Central Research Laboratory</span>
         <ul>
           <li>Built a Python license-monitoring system across 10+ defence R&amp;D tools, cutting manual tracking by ~60%.</li>
-          <li>Developed automated MIS dashboards that informed resource-allocation decisions for senior researchers.</li>
-          <li>Designed REST API and SQL integrations on Ubuntu/Linux to structure tool-usage data from multiple sources.</li>
-          <li>Deployed components with Docker for consistent dev-to-production environments.</li>
+          <li>Developed automated MIS dashboards informing resource-allocation decisions for senior researchers.</li>
+          <li>Designed REST API and SQL integrations on Ubuntu/Linux to structure multi-source tool-usage data.</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="projects">
-    <div class="section-head"><h2>Projects</h2><span class="idx">03</span></div>
+<section id="projects">
+  <div class="wrap">
+    <div class="section-tag"><span class="n">03</span><div class="l"></div><h2>Projects</h2></div>
 
-    <div class="project">
-      <span class="ptag">Founder</span>
+    <div class="project reveal">
+      <span class="idx">01</span>
       <div>
         <h3>GigID</h3>
-        <p>Early-stage fintech venture building credit-scoring infrastructure for India's gig workers, who are largely invisible to traditional lenders. Leading product and partnerships as Co-Founder &amp; CEO.</p>
-        <span class="stack">Credit scoring · Fintech infra · Gig economy</span>
+        <p>Early-stage fintech venture building credit-scoring infrastructure for India's gig workers, who remain largely invisible to traditional lenders. Leading product and partnerships as Co-Founder &amp; CEO.</p>
       </div>
+      <div class="stack">Credit scoring<br>Fintech infra<br>Founder</div>
     </div>
 
-    <div class="project">
-      <span class="ptag">Client work</span>
+    <div class="project reveal">
+      <span class="idx">02</span>
       <div>
         <h3>Indian Two-Wheeler Market Analysis</h3>
-        <p>Extracted and structured 50,000+ records across demographics, manufacturer competition, and regional sales. Correlation analysis and statistical modeling surfaced five key factors driving market-share shifts, feeding River Mobility's EV go-to-market strategy.</p>
-        <span class="stack">Python (pandas, NumPy, scikit-learn) · Power BI</span>
+        <p>Extracted and structured 50,000+ records across demographics, manufacturer competition, and regional sales. Correlation analysis and statistical modeling surfaced five key factors driving market-share shifts for River Mobility's EV go-to-market strategy.</p>
       </div>
+      <div class="stack">Python<br>Power BI<br>Client work</div>
     </div>
 
-    <div class="project">
-      <span class="ptag">Academic</span>
+    <div class="project reveal">
+      <span class="idx">03</span>
       <div>
         <h3>MIS Reporting Automation</h3>
-        <p>Automated weekly MIS report generation from CSV/Excel sources with validation checks for anomalies and missing entries, cutting manual reporting time from ~3 hours to under 15 minutes.</p>
-        <span class="stack">Python · Excel automation · Scheduled scripts</span>
+        <p>Automated weekly MIS report generation from CSV/Excel sources with validation checks for anomalies and missing entries, cutting reporting time from ~3 hours to under 15 minutes.</p>
+      </div>
+      <div class="stack">Python<br>Excel automation<br>Academic</div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-tag"><span class="n">04</span><div class="l"></div><h2>Skills</h2></div>
+    <div class="skills-wrap">
+      <div class="skill-group reveal">
+        <span class="eyebrow">LANGUAGES</span>
+        <div class="chip-row">
+          <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">HTML/CSS</span><span class="chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <span class="eyebrow">BI &amp; REPORTING</span>
+        <div class="chip-row">
+          <span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Advanced Excel</span><span class="chip">MIS Reporting</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <span class="eyebrow">DATA &amp; ML</span>
+        <div class="chip-row">
+          <span class="chip">ETL</span><span class="chip">Statistical Analysis</span><span class="chip">ML</span><span class="chip">NLP</span><span class="chip">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <span class="eyebrow">CLOUD &amp; DEVOPS</span>
+        <div class="chip-row">
+          <span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">REST APIs</span><span class="chip">Linux</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <span class="eyebrow">PATENT &amp; IP</span>
+        <div class="chip-row">
+          <span class="chip">Prior Art Search</span><span class="chip">Claim Mapping</span><span class="chip">Google Patents</span><span class="chip">Espacenet</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <span class="eyebrow">CONCEPTS</span>
+        <div class="chip-row">
+          <span class="chip">KPI Tracking</span><span class="chip">Dashboards</span><span class="chip">DBMS</span><span class="chip">Big Data</span>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="skills">
-    <div class="section-head"><h2>Skills</h2><span class="idx">04</span></div>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h4>Languages</h4>
-        <p>Python, SQL, HTML, CSS, JavaScript (Node.js)</p>
-      </div>
-      <div class="skill-group">
-        <h4>BI &amp; Reporting</h4>
-        <p>Power BI, Tableau, Advanced Excel (Pivot Tables, VLOOKUP, Macros), MIS Reporting</p>
-      </div>
-      <div class="skill-group">
-        <h4>Data &amp; ML</h4>
-        <p>ETL Pipelines, Data Cleaning, Statistical Analysis, Machine Learning, NLP, MongoDB</p>
-      </div>
-      <div class="skill-group">
-        <h4>Cloud &amp; DevOps</h4>
-        <p>AWS, Docker, REST APIs, Linux/Ubuntu</p>
-      </div>
-      <div class="skill-group">
-        <h4>Patent &amp; IP</h4>
-        <p>Prior art retrieval, patentability assessment, claim tree mapping, Google Patents, Espacenet, Orbit Intelligence</p>
-      </div>
-      <div class="skill-group">
-        <h4>Concepts</h4>
-        <p>KPI tracking, dashboard development, data-driven decision making, DBMS, big data analytics</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="education">
-    <div class="section-head"><h2>Education &amp; Certifications</h2><span class="idx">05</span></div>
+<section id="education">
+  <div class="wrap">
+    <div class="section-tag"><span class="n">05</span><div class="l"></div><h2>Education &amp; Certifications</h2></div>
     <div class="split">
-      <div>
+      <div class="reveal">
         <h4>Education</h4>
         <div class="edu-item">
           <div class="deg">B.Tech, Computer Science &amp; Engineering (Data Science)</div>
@@ -373,7 +391,7 @@
           <div class="meta">Jindal Vidya Mandir, Vidyanagar, Bellary · 2022</div>
         </div>
       </div>
-      <div>
+      <div class="reveal">
         <h4>Certifications</h4>
         <div class="edu-item">
           <div class="deg">Data Analysis Certificate</div>
@@ -385,25 +403,103 @@
         </div>
       </div>
     </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <footer id="contact">
   <div class="wrap">
-    <h2>Let's talk data, patents, or gig-economy infrastructure.</h2>
-    <p>Open to Analyst and MIS roles, and always glad to compare notes on BI tooling, prior art search, or early-stage fintech.</p>
-    <div class="contact-links">
-      <a class="btn primary" href="mailto:ds1950217@gmail.com">ds1950217@gmail.com</a>
-      <a class="btn ghost" href="https://linkedin.com/in/Dhanush-s" target="_blank" rel="noopener">linkedin.com/in/Dhanush-s</a>
-      <a class="btn ghost" href="https://github.com/Dhanush-0029" target="_blank" rel="noopener">github.com/Dhanush-0029</a>
+    <h2>Let's build something worth <em style="color:var(--gold); font-style:italic;">defending</em>.</h2>
+    <div class="contact-row">
+      <div class="contact-links">
+        <a href="mailto:ds1950217@gmail.com">ds1950217@gmail.com</a>
+        <a href="https://linkedin.com/in/Dhanush-s" target="_blank" rel="noopener">linkedin.com/in/Dhanush-s</a>
+        <a href="https://github.com/Dhanush-0029" target="_blank" rel="noopener">github.com/Dhanush-0029</a>
+      </div>
     </div>
     <div class="foot-bottom">
       <span>Dhanush S — Bengaluru, Karnataka</span>
-      <span>Built &amp; hosted on GitHub Pages</span>
+      <span>© 2026</span>
     </div>
   </div>
 </footer>
+
+<script>
+  // --- 3D hero visual (three.js): faceted wireframe form, gentle continuous rotation ---
+  (function(){
+    const canvas = document.getElementById('hero-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 9);
+
+    function resize(){
+      const w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      camera.aspect = w/h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const geo = new THREE.IcosahedronGeometry(3.4, 1);
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0xC7A25C, wireframe:true, transparent:true, opacity:0.45 });
+    const mesh = new THREE.Mesh(geo, wireMat);
+    mesh.position.set(3.6, 0, 0);
+    scene.add(mesh);
+
+    const dotGeo = new THREE.SphereGeometry(0.02, 6, 6);
+    const dotMat = new THREE.MeshBasicMaterial({ color: 0xF5F1EA });
+    for (let i=0;i<40;i++){
+      const d = new THREE.Mesh(dotGeo, dotMat);
+      d.position.set((Math.random()-0.5)*14, (Math.random()-0.5)*8, (Math.random()-0.5)*6 - 2);
+      scene.add(d);
+    }
+
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener('mousemove', (e)=>{
+      mouseX = (e.clientX / window.innerWidth - 0.5);
+      mouseY = (e.clientY / window.innerHeight - 0.5);
+    });
+
+    function animate(){
+      requestAnimationFrame(animate);
+      mesh.rotation.y += 0.0025;
+      mesh.rotation.x += 0.0009;
+      camera.position.x += (mouseX*1.2 - camera.position.x) * 0.02;
+      camera.position.y += (-mouseY*0.8 - camera.position.y) * 0.02;
+      camera.lookAt(scene.position);
+      renderer.render(scene, camera);
+    }
+    animate();
+  })();
+
+  // --- GSAP scroll reveals: one orchestrated hero entrance + section-level reveals ---
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.timeline()
+    .from('.hero-copy .eyebrow', { opacity:0, y:14, duration:0.6 })
+    .from('.hero-copy h1', { opacity:0, y:26, duration:0.8 }, '-=0.35')
+    .from('.hero-copy p', { opacity:0, y:18, duration:0.7 }, '-=0.45')
+    .from('.hero-cta', { opacity:0, y:14, duration:0.6 }, '-=0.4')
+    .from('.hero-portrait', { opacity:0, scale:0.96, duration:0.9 }, '-=0.8');
+
+  document.querySelectorAll('.reveal').forEach((el)=>{
+    gsap.to(el, {
+      opacity:1, y:0, duration:0.9, ease:'power2.out',
+      scrollTrigger:{ trigger: el, start:'top 85%' }
+    });
+  });
+
+  document.querySelectorAll('.job, .project').forEach((el, i)=>{
+    if (!el.classList.contains('reveal')) {
+      gsap.from(el, {
+        opacity:0, y:24, duration:0.8, ease:'power2.out',
+        scrollTrigger:{ trigger: el, start:'top 88%' }
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
